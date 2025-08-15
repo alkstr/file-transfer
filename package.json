@@ -1,0 +1,23 @@
+{
+  "name": "file-transfer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^6.6.0",
+    "esbuild": "^0.25.9"
+  }
+}

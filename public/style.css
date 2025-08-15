@@ -1,0 +1,47 @@
+:root {
+    --font-base: 1.25rem;
+    --font-lg: 1.5rem;
+    --gap-lg: 1rem;
+    --icon-size: 8rem;
+}
+
+html,
+body {
+    background-color: #222222;
+    color: #ffffff;
+    height: 100vh;
+    margin: 0;
+    font-size: var(--font-base);
+}
+
+.upload-form {
+    gap: var(--gap-lg);
+}
+
+.choose-button {
+    color: #ffffff;
+    font-size: var(--font-lg);
+    padding: 1rem 1.5rem;
+    border-radius: 2rem;
+    border-width: 0.5rem;
+    border-style: solid;
+}
+
+.choose-button:hover {
+    color: #cccccc;
+    border-color: #cccccc;
+}
+
+.choose-button:active {
+    color: #999999;
+    border-color: #999999;
+}
+
+.choose-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+.send-button {
+    font-size: var(--font-lg);
+}

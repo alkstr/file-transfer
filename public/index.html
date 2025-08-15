@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Files</title>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./utilities.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="flex-col justify-center items-center">
+    <main>
+        <form id="uploadForm" class="upload-form flex-col">
+            <label class="choose-button flex-col items-center">
+                <svg class="choose-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                Choose files
+                <input id="filesInput" type="file" name="files" multiple required hidden />
+            </label>
+            <p id="selectionText" class="text-center">No files selected</p>
+            <button class="send-button" type="submit">Send</button>
+        </form>
+    </main>
+</body>
+
+</html>
