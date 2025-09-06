@@ -3,6 +3,7 @@ const filesInput = document.getElementById("filesInput")
 const selectionText = document.getElementById("selectionText")
 const sendButton = document.getElementById("sendButton")
 
+sendButton.disabled = true
 filesInput.addEventListener("change", onSelectFiles)
 uploadForm.addEventListener("submit", onSubmitFiles)
 
