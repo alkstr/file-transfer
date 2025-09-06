@@ -10,17 +10,20 @@ async function onSubmitFiles(e) {
     e.preventDefault()
 
     const formData = new FormData(uploadForm)
-    const response = await fetch(
-        "/upload",
-        { method: "POST", body: formData }
-    )
 
-    if (!response.ok) {
-        alert(`Upload failed: ${response.statusText}`)
-    } else {
+    try {
+        const response = await fetch(
+            "/upload",
+            { method: "POST", body: formData }
+        )
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        }
         alert("Upload successful")
         filesInput.value = ""
-        changeFiles()
+        onSelectFiles()
+    } catch (err) {
+        alert(`Upload failed: ${err.message}`)
     }
 }
 
