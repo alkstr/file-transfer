@@ -1,11 +1,12 @@
 const uploadForm = document.getElementById("uploadForm")
 const filesInput = document.getElementById("filesInput")
 const selectionText = document.getElementById("selectionText")
+const sendButton = document.getElementById("sendButton")
 
-filesInput.addEventListener("change", updateSelectionText)
-uploadForm.addEventListener("submit", uploadFiles)
+filesInput.addEventListener("change", changeFiles)
+uploadForm.addEventListener("submit", submitFiles)
 
-async function uploadFiles(e) {
+async function submitFiles(e) {
     e.preventDefault()
 
     const formData = new FormData(uploadForm)
@@ -19,13 +20,17 @@ async function uploadFiles(e) {
     } else {
         alert("Upload successful")
         filesInput.value = ""
-        updateSelectionText()
+        changeFiles()
     }
 }
 
-function updateSelectionText() {
+function changeFiles() {
     const fileCount = filesInput.files.length
-    selectionText.textContent = fileCount === 0
-        ? "No files selected"
-        : `${fileCount} file(s) selected`
+    if (fileCount === 0) {
+        selectionText.textContent = "No files selected"
+        sendButton.disabled = true
+    } else {
+        selectionText.textContent = `${fileCount} file(s) selected`
+        sendButton.disabled = false
+    }
 }
