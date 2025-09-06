@@ -12,6 +12,7 @@ body {
     height: 100vh;
     margin: 0;
     font-size: var(--font-base);
+    font-family: Trebuchet MS, Arial, sans-serif;
 }
 
 .upload-form {
