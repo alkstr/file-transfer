@@ -3,10 +3,10 @@ const filesInput = document.getElementById("filesInput")
 const selectionText = document.getElementById("selectionText")
 const sendButton = document.getElementById("sendButton")
 
-filesInput.addEventListener("change", changeFiles)
-uploadForm.addEventListener("submit", submitFiles)
+filesInput.addEventListener("change", onSelectFiles)
+uploadForm.addEventListener("submit", onSubmitFiles)
 
-async function submitFiles(e) {
+async function onSubmitFiles(e) {
     e.preventDefault()
 
     const formData = new FormData(uploadForm)
@@ -24,7 +24,7 @@ async function submitFiles(e) {
     }
 }
 
-function changeFiles() {
+function onSelectFiles() {
     const fileCount = filesInput.files.length
     if (fileCount === 0) {
         selectionText.textContent = "No files selected"
