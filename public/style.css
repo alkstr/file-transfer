@@ -44,5 +44,6 @@ body {
 }
 
 .send-button {
+    background-color: rgb(230, 160, 30);
     font-size: var(--font-lg);
 }
