@@ -1,3 +1,24 @@
+:root {
+    --color-basic: hsl(0, 0%, 40%);
+    --color-basic-hover: hsl(0, 0%, 50%);
+
+    --color-primary: hsl(40, 80%, 50%);
+    --color-primary-hover: hsl(40, 80%, 60%);
+
+    --color-shadow: rgb(0, 0, 0);
+
+    --font-medium: 1.25rem;
+    --font-large: 1.5rem;
+}
+
+.font-medium {
+    font-size: var(--font-medium);
+}
+
+.font-large {
+    font-size: var(--font-large);
+}
+
 .flex-col {
     display: flex;
     flex-direction: column;
@@ -15,37 +36,37 @@
     text-align: center;
 }
 
-button {
+.button {
     color: rgb(255, 255, 255);
-    background-color: rgb(96, 96, 96);
+    background-color: var(--color-basic);
     position: relative;
-    padding: 0.5em 1em;
-    border: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-shadow);
     border-radius: 0.75rem;
     cursor: pointer;
     overflow: hidden;
+    box-shadow: 0rem 0.25em var(--color-shadow);
 }
 
-button:disabled {
+.button:disabled {
     cursor: not-allowed;
+    opacity: 0.5;
 }
 
-button::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
+.button:hover:not(:disabled) {
+    background-color: var(--color-basic-hover);
+    text-decoration: underline;
 }
 
-button:hover::after {
-    background: rgba(255, 255, 255, 0.1);
+.button:active:not(:disabled) {
+    transform: translateY(0.25em);
+    box-shadow: 0rem 0rem var(--color-shadow);
 }
 
-button:active::after {
-    background: rgba(0, 0, 0, 0.1);
+.button-primary {
+    background-color: var(--color-primary);
 }
 
-button:disabled::after {
-    background: rgba(0, 0, 0, 0.4);
+.button-primary:hover:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
 }

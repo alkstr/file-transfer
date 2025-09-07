@@ -1,6 +1,4 @@
 :root {
-    --font-base: 1.25rem;
-    --font-lg: 1.5rem;
     --gap-lg: 1rem;
     --icon-size: 8rem;
 }
@@ -11,7 +9,6 @@ body {
     color: #ffffff;
     height: 100vh;
     margin: 0;
-    font-size: var(--font-base);
     font-family: Trebuchet MS, Arial, sans-serif;
 }
 
@@ -41,9 +38,4 @@ body {
 .choose-icon {
     width: var(--icon-size);
     height: var(--icon-size);
-}
-
-.send-button {
-    background-color: rgb(230, 160, 30);
-    font-size: var(--font-lg);
 }
