@@ -11,7 +11,8 @@ export default defineConfig(
       languageOptions: {
         globals: { ...globals.browser, ...globals.node },
       },
-      rules: { semi: ["error", "always"] }
+      rules: { semi: ["error", "always"] },
+      ignores: ["build/**"],
     }
   ]
 );
