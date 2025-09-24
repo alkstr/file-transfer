@@ -26,7 +26,8 @@ body {
     cursor: pointer;
 }
 
-.choose-button:hover {
+.choose-button:hover,
+.choose-button.drag {
     background-color: hsl(0, 0%, 30%);
 }
 

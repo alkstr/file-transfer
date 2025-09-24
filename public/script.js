@@ -1,4 +1,5 @@
 const uploadForm = document.getElementById("uploadForm");
+const chooseButton = document.getElementById("chooseButton");
 const filesInput = document.getElementById("filesInput");
 const selectionText = document.getElementById("selectionText");
 const sendButton = document.getElementById("sendButton");
@@ -6,6 +7,33 @@ const sendButton = document.getElementById("sendButton");
 sendButton.disabled = true;
 filesInput.addEventListener("change", onSelectFiles);
 uploadForm.addEventListener("submit", onSubmitFiles);
+
+chooseButton.addEventListener("dragenter", onFileDragEnter); 
+chooseButton.addEventListener(
+    "dragleave",
+    e => {
+        // do nothing if cursor moves to a child element
+        if (chooseButton.contains(e.relatedTarget)) {
+            return;
+        }
+        onFileDragLeave();
+    }
+);
+chooseButton.addEventListener(
+    "dragover",
+    e => {
+        e.preventDefault();
+    }
+);
+chooseButton.addEventListener(
+    "drop",
+    e => {
+        e.preventDefault();
+        filesInput.files = e.dataTransfer.files;
+        onSelectFiles();
+        onFileDragLeave();
+    }
+);
 
 async function onSubmitFiles(e) {
     e.preventDefault();
@@ -37,4 +65,12 @@ function onSelectFiles() {
         selectionText.textContent = `${fileCount} file(s) selected`;
         sendButton.disabled = false;
     }
+}
+
+function onFileDragEnter() {
+    chooseButton.classList.add("drag");
+}
+
+function onFileDragLeave() {
+    chooseButton.classList.remove("drag");
 }
