@@ -18,21 +18,20 @@ body {
 
 .choose-button {
     color: #ffffff;
+    background-color: hsl(0, 0%, 20%);
     font-size: var(--font-lg);
     padding: 1rem 1.5rem;
+    border: 0.33rem dashed #ffffff;
     border-radius: 2rem;
-    border-width: 0.5rem;
-    border-style: solid;
+    cursor: pointer;
 }
 
 .choose-button:hover {
-    color: #cccccc;
-    border-color: #cccccc;
+    background-color: hsl(0, 0%, 30%);
 }
 
 .choose-button:active {
-    color: #999999;
-    border-color: #999999;
+    background-color: hsl(0, 0%, 40%);
 }
 
 .choose-icon {
