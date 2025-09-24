@@ -17,7 +17,10 @@
     "qrcode": "^1.5.4"
   },
   "devDependencies": {
+    "@eslint/js": "^9.36.0",
     "@yao-pkg/pkg": "^6.6.0",
-    "esbuild": "^0.25.9"
+    "esbuild": "^0.25.9",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0"
   }
 }
