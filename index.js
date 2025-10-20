@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import os from "os";
+import fs from "fs";
 import fsp from "fs/promises";
 import path from "path";
 import QRCode from "qrcode";
@@ -15,8 +16,8 @@ const PORT = process.env.PORT ?? 8039;
 const UPLOADS_DIR = "./uploads/";
 const SHARED_DIR = "./shared/";
 
-await fsp.mkdir(UPLOADS_DIR, { recursive: true });
-await fsp.mkdir(SHARED_DIR, { recursive: true });
+fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+fs.mkdirSync(SHARED_DIR, { recursive: true });
 
 const app = express();
 app.use(express.static("public"));
