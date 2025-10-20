@@ -12,6 +12,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "archiver": "^7.0.1",
     "express": "^5.1.0",
     "multer": "^2.0.2",
     "qrcode": "^1.5.4"
@@ -21,6 +22,8 @@
     "@yao-pkg/pkg": "^6.6.0",
     "esbuild": "^0.25.9",
     "eslint": "^9.36.0",
-    "globals": "^16.4.0"
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2"
   }
 }

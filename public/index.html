@@ -4,28 +4,66 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Files</title>
+    <title>File transfer</title>
     <script src="./script.js" defer></script>
     <link rel="stylesheet" href="./utilities.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body class="flex-col justify-center items-center">
-    <main class="font-medium">
-        <form id="uploadForm" class="upload-form flex-col">
-            <label id="chooseButton" class="choose-button flex-col items-center">
-                <svg class="choose-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-                </svg>
-                Choose files
-                <input id="filesInput" type="file" name="files" multiple required hidden />
-            </label>
-            <p id="selectionText" class="text-center">No files selected</p>
-            <button id="sendButton" class="button button-primary" type="submit" disabled="true">Send</button>
-        </form>
+<body>
+    <header></header>
+    <main class="flex-col gap-large">
+        <section>
+            <form id="uploadForm" class="flex-col items-center gap-medium upload-form">
+                <span class="text-center font-large">Upload files</span>
+                <label id="selectButton" class="select-button flex-col items-center text-center font-medium">
+                    <svg class="select-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                    </svg>
+                    Select or drop files
+                    <input id="filesInput" type="file" name="files" multiple required hidden />
+                </label>
+                <p id="selectionText" class="text-center">No files selected</p>
+                <button id="sendButton" class="button button-primary" type="submit" disabled>Send</button>
+            </form>
+        </section>
+
+        <div class="separator"></div>
+
+        <section class="flex-col items-center">
+            <form id="downloadForm" class="upload-form flex-col gap-medium">
+                <span class="text-center font-large">Download files</span>
+
+                <template id="filesTableItemTemplate">
+                    <tr class="files-table-item">
+                        <td><input type="checkbox" class="file-checkbox" /></td>
+                        <td class="file-name"></td>
+                        <td class="file-size"></td>
+                    </tr>
+                </template>
+
+                <table id="filesTable" class="files-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>File</th>
+                            <th>Size</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div class="flex-row gap-medium justify-center">
+                    <button id="selectAllButton" type="button" class="button">Select all</button>
+                    <button id="downloadButton" class="button button-primary">
+                        Download
+                    </button>
+                </div>
+            </form>
+        </section>
     </main>
+    <footer></footer>
 </body>
 
 </html>

@@ -1,41 +1,81 @@
 :root {
-    --gap-lg: 1rem;
     --icon-size: 8rem;
 }
 
 html,
 body {
-    background-color: #222222;
+    background-color: var(--color-bg);
     color: #ffffff;
-    height: 100vh;
     margin: 0;
     font-family: Trebuchet MS, Arial, sans-serif;
 }
 
-.upload-form {
-    gap: var(--gap-lg);
+header,
+footer {
+    height: 3rem;
 }
 
-.choose-button {
+.select-button {
     color: #ffffff;
     background-color: hsl(0, 0%, 20%);
-    font-size: var(--font-lg);
+    width: 10rem;
+    aspect-ratio: 1;
     padding: 1rem 1.5rem;
-    border: 0.33rem dashed #ffffff;
+    border: var(--border-size) dashed #ffffff;
     border-radius: 2rem;
     cursor: pointer;
+    user-select: none;
 }
 
-.choose-button:hover,
-.choose-button.drag {
+.select-button:hover,
+.select-button.drag {
     background-color: hsl(0, 0%, 30%);
 }
 
-.choose-button:active {
+.select-button:active {
     background-color: hsl(0, 0%, 40%);
 }
 
-.choose-icon {
+.select-icon {
     width: var(--icon-size);
     height: var(--icon-size);
+}
+
+.files-table {
+    table-layout: fixed; 
+    width: 80vw;
+    border-spacing: 0;
+    border: var(--border-size) solid var(--color-basic);
+    border-radius: 1rem;
+}
+
+.files-table th:nth-child(1),
+.files-table td:nth-child(1) {
+    width: 3rem;
+}
+
+.files-table th:nth-child(3),
+.files-table td:nth-child(3) {
+    width: 6rem;
+}
+
+.files-table th {
+    padding: 0.5rem;
+    background-color: var(--color-bg-lighter);
+}
+
+.files-table-item td {
+    white-space: nowrap;  
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0.5rem 1.5rem;
+}
+
+.files-table-item td:nth-child(1) {
+    width: 1rem;
+}
+
+
+.files-table-item:nth-of-type(even) {
+    background-color: var(--color-bg-lighter);
 }

@@ -7,8 +7,17 @@
 
     --color-shadow: rgb(0, 0, 0);
 
+    --color-bg: hsl(0, 0%, 10%);
+    --color-bg-lighter: hsl(0, 0%, 15%);
+
     --font-medium: 1.25rem;
     --font-large: 1.5rem;
+
+    --gap-small: 0.25rem;
+    --gap-medium: 1rem;
+    --gap-large: 3rem;
+
+    --border-size: 0.2rem;
 }
 
 .font-medium {
@@ -19,9 +28,30 @@
     font-size: var(--font-large);
 }
 
+.gap-large {
+    gap: var(--gap-large);
+}
+
+.gap-medium {
+    gap: var(--gap-medium);
+}
+
+.gap-small {
+    gap: var(--gap-small);
+}
+
 .flex-col {
     display: flex;
     flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-1 {
+    flex: 1;
 }
 
 .justify-center {
@@ -36,12 +66,20 @@
     text-align: center;
 }
 
+.w-8 {
+    width:8rem;
+}
+
+.separator {
+    border-bottom: var(--border-size) solid var(--color-basic);
+}
+
 .button {
     color: rgb(255, 255, 255);
     background-color: var(--color-basic);
     position: relative;
     padding: 0.5rem 1rem;
-    border: 2px solid var(--color-shadow);
+    border: var(--border-size) solid var(--color-shadow);
     border-radius: 0.75rem;
     cursor: pointer;
     overflow: hidden;

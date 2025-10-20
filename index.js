@@ -1,51 +1,95 @@
 import express from "express";
 import multer from "multer";
 import os from "os";
-import fs from "fs";
+import fsp from "fs/promises";
+import path from "path";
 import QRCode from "qrcode";
+import archiver from "archiver";
 
-const LOCAL_IP = Object.values(os.networkInterfaces())
-    .flat()
-    .filter(({ family, internal }) => family === "IPv4" && !internal)
-    .map(({ address }) => address)?.[0] ?? "localhost";
+const LOCAL_IP =
+    Object.values(os.networkInterfaces())
+        .flat()
+        .filter(({ family, internal }) => family === "IPv4" && !internal)
+        .map(({ address }) => address)?.[0] ?? "localhost";
 const PORT = process.env.PORT ?? 8039;
-const DOWNLOADS_DIR = "./downloads/";
+const UPLOADS_DIR = "./uploads/";
+const SHARED_DIR = "./shared/";
+
+await fsp.mkdir(UPLOADS_DIR, { recursive: true });
+await fsp.mkdir(SHARED_DIR, { recursive: true });
 
 const app = express();
 app.use(express.static("public"));
+app.use(express.json());
 
 const storage = multer.diskStorage({
     destination: (_req, _file, callback) => {
-        if (!fs.existsSync(DOWNLOADS_DIR)) {
-            fs.mkdirSync(DOWNLOADS_DIR);
-        }
-        callback(null, DOWNLOADS_DIR);
+        callback(null, UPLOADS_DIR);
     },
     filename: (_req, file, callback) => {
-        callback(null, file.originalname);
-    }
+        const name = Buffer.from(file.originalname, "latin1").toString("utf-8");
+        callback(null, name);
+    },
 });
 const uploadMiddleware = multer({ storage });
 
-app.post(
-    "/upload",
-    uploadMiddleware.array("files"),
-    (req, res) => {
-        if (!req.files || req.files.length === 0) {
-            return res.status(400).send("No files uploaded");
-        }
-        return res.status(200).send();
+app.post("/uploads", uploadMiddleware.array("files"), (req, res) => {
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ error: "No files uploaded" });
     }
-);
+    return res.sendStatus(200);
+});
+
+app.get("/shared", async (_req, res) => {
+    try {
+        const fileNames = await fsp.readdir(SHARED_DIR);
+        const filesInfo = await Promise.all(
+            fileNames.map(async (file) => {
+                const fullPath = path.join(SHARED_DIR, file);
+                const stat = await fsp.stat(fullPath);
+                return { file, size: stat.size };
+            })
+        );
+        return res.json(filesInfo);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: err.message });
+    }
+});
+
+app.post("/shared", async (req, res) => {
+    try {
+        const files = req.body;
+        if (!Array.isArray(files) || files.length === 0) {
+            return res.status(400).json({ error: "No filenames provided" });
+        }
+
+        const archive = archiver("zip", { zlib: { level: 9 } });
+        res.attachment(`${crypto.randomUUID()}.zip`);
+        archive.pipe(res);
+
+        for (const file of files) {
+            const fileBaseName = path.basename(file);
+            const fullPath = path.join(SHARED_DIR, fileBaseName);
+
+            try {
+                await fsp.access(fullPath);
+                archive.file(fullPath, { name: fileBaseName });
+            } catch {
+                /* empty */
+            }
+        }
+        await archive.finalize();
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: err.message });
+    }
+});
 
 const address = `http://${LOCAL_IP}:${PORT}`;
-
 app.listen(PORT, "0.0.0.0", async () => {
     console.log(`Server running at ${address}`);
-    QRCode.toString(
-        `${address}`,
-        (_err, text) => {
-            console.log(text);
-        }
-    );
+    QRCode.toString(`${address}`, (_err, text) => {
+        console.log(text);
+    });
 });
