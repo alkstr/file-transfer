@@ -15,14 +15,14 @@
     <main class="flex-col gap-large">
         <section>
             <form id="uploadForm" class="flex-col items-center gap-medium upload-form">
-                <span class="text-center font-large">Upload files</span>
-                <label id="selectButton" class="select-button flex-col items-center text-center font-medium">
-                    <svg class="select-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor">
+                <h1 class="text-center">Upload</h1>
+                <label id="selectButton" class="select-button flex-col items-center text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" width="8rem">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
                     </svg>
-                    Select or drop files
+                    <p>Select or drop files</p>
                     <input id="filesInput" type="file" name="files" multiple required hidden />
                 </label>
                 <p id="selectionText" class="text-center">No files selected</p>
@@ -34,7 +34,7 @@
 
         <section class="flex-col items-center">
             <form id="downloadForm" class="upload-form flex-col gap-medium">
-                <span class="text-center font-large">Download files</span>
+                <h1 class="text-center">Download</h1>
 
                 <template id="filesTableItemTemplate">
                     <tr class="files-table-item">
@@ -44,16 +44,18 @@
                     </tr>
                 </template>
 
-                <table id="filesTable" class="files-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>File</th>
-                            <th>Size</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div class="files-table-container">
+                    <table id="filesTable" class="files-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>File</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
                 <div class="flex-row gap-medium justify-center">
                     <button id="selectAllButton" type="button" class="button">Select all</button>
                     <button id="downloadButton" class="button button-primary">

@@ -10,6 +10,7 @@
     --color-bg: hsl(0, 0%, 10%);
     --color-bg-lighter: hsl(0, 0%, 15%);
 
+    --font-basic: 16px;
     --font-medium: 1.25rem;
     --font-large: 1.5rem;
 
@@ -20,12 +21,21 @@
     --border-size: 0.2rem;
 }
 
-.font-medium {
+html {
+    font-size: var(--font-basic);
+}
+
+h1 {
+    font-size: var(--font-large);
+}
+
+h2 {
     font-size: var(--font-medium);
 }
 
-.font-large {
-    font-size: var(--font-large);
+input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
 }
 
 .gap-large {
@@ -66,10 +76,6 @@
     text-align: center;
 }
 
-.w-8 {
-    width:8rem;
-}
-
 .separator {
     border-bottom: var(--border-size) solid var(--color-basic);
 }
@@ -78,7 +84,8 @@
     color: rgb(255, 255, 255);
     background-color: var(--color-basic);
     position: relative;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
     border: var(--border-size) solid var(--color-shadow);
     border-radius: 0.75rem;
     cursor: pointer;

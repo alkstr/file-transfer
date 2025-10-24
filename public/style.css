@@ -1,11 +1,7 @@
-:root {
-    --icon-size: 8rem;
-}
-
 html,
 body {
     background-color: var(--color-bg);
-    color: #ffffff;
+    color: #fff;
     margin: 0;
     font-family: Trebuchet MS, Arial, sans-serif;
 }
@@ -16,12 +12,11 @@ footer {
 }
 
 .select-button {
-    color: #ffffff;
+    color: #fff;
     background-color: hsl(0, 0%, 20%);
-    width: 10rem;
     aspect-ratio: 1;
-    padding: 1rem 1.5rem;
-    border: var(--border-size) dashed #ffffff;
+    padding: 1rem;
+    border: var(--border-size) dashed #fff;
     border-radius: 2rem;
     cursor: pointer;
     user-select: none;
@@ -36,14 +31,13 @@ footer {
     background-color: hsl(0, 0%, 40%);
 }
 
-.select-icon {
-    width: var(--icon-size);
-    height: var(--icon-size);
+.files-table-container {
+    width: 80vw;
+    overflow-x: auto;
 }
 
 .files-table {
-    table-layout: fixed; 
-    width: 80vw;
+    table-layout: fixed;
     border-spacing: 0;
     border: var(--border-size) solid var(--color-basic);
     border-radius: 1rem;
@@ -56,16 +50,17 @@ footer {
 
 .files-table th:nth-child(3),
 .files-table td:nth-child(3) {
-    width: 6rem;
+    width: 7rem;
 }
 
 .files-table th {
-    padding: 0.5rem;
+    padding: 0.5rem 1.5rem;
     background-color: var(--color-bg-lighter);
+    text-align: left;
 }
 
 .files-table-item td {
-    white-space: nowrap;  
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     padding: 0.5rem 1.5rem;
@@ -74,7 +69,6 @@ footer {
 .files-table-item td:nth-child(1) {
     width: 1rem;
 }
-
 
 .files-table-item:nth-of-type(even) {
     background-color: var(--color-bg-lighter);
