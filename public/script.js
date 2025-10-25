@@ -71,7 +71,7 @@
 {
     const downloadForm = document.getElementById("downloadForm");
     const selectAllButton = document.getElementById("selectAllButton");
-    const filesTable = document.getElementById("filesTable");
+    const filesTableBody = document.getElementById("filesTableBody");
     const filesTableItemTemplate = document.getElementById(
         "filesTableItemTemplate"
     );
@@ -97,7 +97,7 @@
             }
 
             itemNode.querySelector(".file-size").textContent = formatSize(size);
-            filesTable.appendChild(itemNode);
+            filesTableBody.appendChild(itemNode);
         });
     }
     getFiles();
