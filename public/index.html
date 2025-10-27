@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File transfer</title>
     <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="./utilities.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./new-style.css">
 </head>
 
 <body>
@@ -26,7 +25,7 @@
                     <input id="filesInput" type="file" name="files" multiple required hidden />
                 </label>
                 <p id="selectionText" class="text-center">No files selected</p>
-                <button id="sendButton" class="button button-primary" type="submit" disabled>Send</button>
+                <button id="sendButton" class="primary" type="submit" disabled>Send</button>
             </form>
         </section>
 
@@ -44,7 +43,7 @@
                     </tr>
                 </template>
 
-                <div class="files-table-container">
+                <div class="table-container">
                     <table class="files-table">
                         <thead>
                             <tr>
@@ -57,8 +56,8 @@
                     </table>
                 </div>
                 <div class="flex-row gap-medium justify-center">
-                    <button id="selectAllButton" type="button" class="button">Select all</button>
-                    <button id="downloadButton" class="button button-primary">
+                    <button id="selectAllButton" type="button">Select all</button>
+                    <button id="downloadButton" class="primary">
                         Download
                     </button>
                 </div>
