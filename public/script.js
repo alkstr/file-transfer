@@ -14,12 +14,18 @@
 
     function onSelectFiles() {
         const fileCount = filesInput.files.length;
-        if (fileCount === 0) {
-            selectionText.textContent = "No files selected";
-            sendButton.disabled = true;
-        } else {
-            selectionText.textContent = `${fileCount} file(s) selected`;
-            sendButton.disabled = false;
+        switch (fileCount) {
+            case 0:
+                selectionText.textContent = "No files selected";
+                sendButton.disabled = true;
+                break;
+            case 1:
+                selectionText.textContent = "1 file selected";
+                sendButton.disabled = false;
+                break
+            default:
+                selectionText.textContent = `${fileCount} files selected`;
+                sendButton.disabled = false;
         }
     }
 

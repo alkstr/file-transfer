@@ -13,7 +13,7 @@
     <header></header>
     <main class="flex-col gap-large">
         <section>
-            <form id="uploadForm" class="flex-col items-center gap-medium upload-form">
+            <form id="uploadForm" class="flex-col items-center gap-medium">
                 <h1 class="text-center">Upload</h1>
                 <label id="selectButton" class="select-button flex-col items-center text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -32,7 +32,7 @@
         <div class="separator"></div>
 
         <section class="flex-col items-center">
-            <form id="downloadForm" class="upload-form flex-col gap-medium">
+            <form id="downloadForm" class="flex-col items-center gap-medium">
                 <h1 class="text-center">Download</h1>
 
                 <template id="filesTableItemTemplate">
@@ -44,7 +44,7 @@
                 </template>
 
                 <div class="table-container">
-                    <table class="files-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th></th>
