@@ -84,6 +84,8 @@
         "filesTableItemTemplate"
     );
 
+    selectAllCheckbox.checked = false;
+
     async function getFiles() {
         const response = await fetch("/shared");
         const files = await response.json();
