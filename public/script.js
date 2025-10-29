@@ -22,7 +22,7 @@
             case 1:
                 selectionText.textContent = "1 file selected";
                 sendButton.disabled = false;
-                break
+                break;
             default:
                 selectionText.textContent = `${fileCount} files selected`;
                 sendButton.disabled = false;
@@ -34,8 +34,10 @@
     uploadForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const formData = new FormData(uploadForm);
+        const zip = formData.get("zip");
+        const url = `/uploads?zip=${encodeURIComponent(zip)}`;
         try {
-            const response = await fetch("/uploads", {
+            const response = await fetch(url, {
                 method: "POST",
                 body: formData,
             });
