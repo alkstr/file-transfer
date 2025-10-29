@@ -78,7 +78,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 {
     const downloadForm = document.getElementById("downloadForm");
-    const selectAllButton = document.getElementById("selectAllButton");
+    const selectAllCheckbox = document.getElementById("selectAllCheckbox");
     const filesTableBody = document.getElementById("filesTableBody");
     const filesTableItemTemplate = document.getElementById(
         "filesTableItemTemplate"
@@ -108,12 +108,26 @@
             filesTableBody.appendChild(itemNode);
         });
     }
-    getFiles();
+    let checkboxes;
+    getFiles().then(() => {
+        checkboxes = Array.from(document.querySelectorAll(".file-checkbox"));
+        checkboxes.forEach((cb) =>
+            cb.addEventListener("click", () => {
+                if (checkboxes.every((cb) => !cb.checked)) {
+                    selectAllCheckbox.checked = false;
+                } else {
+                    selectAllCheckbox.checked = true;
+                }
+            })
+        );
+    });
 
-    selectAllButton.addEventListener("click", () => {
-        const checkboxes = document.querySelectorAll(".file-checkbox");
-        const allChecked = Array.from(checkboxes).every((cb) => cb.checked);
-        checkboxes.forEach((cb) => (cb.checked = !allChecked));
+    selectAllCheckbox.addEventListener("click", () => {
+        if (selectAllCheckbox.checked) {
+            checkboxes.forEach((cb) => (cb.checked = true));
+        } else {
+            checkboxes.forEach((cb) => (cb.checked = false));
+        }
     });
 
     downloadForm.addEventListener("submit", async (e) => {
