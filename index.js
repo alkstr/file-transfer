@@ -26,6 +26,36 @@ fs.mkdirSync(TEMP_DIR, { recursive: true });
 fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 fs.mkdirSync(SHARED_DIR, { recursive: true });
 
+const Ok = (value) => ({ ok: true, value });
+const Err = (error) => ({ ok: false, error });
+
+async function tryGetFiles(dir) {
+    try {
+        const entries = await fsp.readdir(dir, { withFileTypes: true });
+        const files = [];
+
+        for (const entry of entries) {
+            if (!entry.isFile()) {
+                continue;
+            }
+
+            const fullPath = path.join(dir, entry.name);
+            let stat;
+            try {
+                stat = await fsp.stat(fullPath);
+            } catch (err) {
+                console.warn(err.message);
+                continue;
+            }
+            files.push({ file: entry.name, size: stat.size });
+        }
+
+        return Ok(files);
+    } catch (err) {
+        return Err(`Failed to read directory '${dir}': ${err.message}`);
+    }
+}
+
 const app = express();
 app.use(express.static("public"));
 app.use(express.json());
@@ -73,20 +103,14 @@ app.post("/uploads", uploadMiddleware.array("files"), async (req, res) => {
 });
 
 app.get("/shared", async (_req, res) => {
-    try {
-        const fileNames = await fsp.readdir(SHARED_DIR);
-        const filesInfo = await Promise.all(
-            fileNames.map(async (file) => {
-                const fullPath = path.join(SHARED_DIR, file);
-                const stat = await fsp.stat(fullPath);
-                return { file, size: stat.size };
-            })
-        );
-        return res.json(filesInfo);
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ error: err.message });
+    const result = await tryGetFiles(SHARED_DIR);
+
+    if (!result.ok) {
+        console.error(result.error);
+        return res.status(500).json({ error: result.error });
     }
+
+    return res.json(result.value);
 });
 
 app.post("/shared", async (req, res) => {
