@@ -6,11 +6,15 @@ import fsp from "fs/promises";
 import path from "path";
 import QRCode from "qrcode";
 import archiver from "archiver";
+import { cwd } from "process";
 
 const LOCAL_IP =
     Object.values(os.networkInterfaces())
         .flat()
-        .filter(({ family, internal }) => family === "IPv4" && !internal)
+        .filter(
+            ({ family, internal, address }) =>
+                family === "IPv4" && !internal && address.startsWith("192.168.")
+        )
         .map(({ address }) => address)?.[0] ?? "localhost";
 const PORT = process.env.PORT ?? 8039;
 
@@ -91,6 +95,12 @@ app.post("/shared", async (req, res) => {
         if (!Array.isArray(files) || files.length === 0) {
             return res.status(400).json({ error: "No filenames provided" });
         }
+        if (files.length == 1) {
+            const fileBaseName = path.basename(files[0]);
+            res.attachment(fileBaseName);
+            res.sendFile(fileBaseName, { root: SHARED_DIR });
+            return;
+        }
 
         const archive = archiver("zip", { zlib: { level: 9 } });
         res.attachment(`${crypto.randomUUID()}.zip`);
@@ -115,8 +125,12 @@ app.post("/shared", async (req, res) => {
 });
 
 const address = `http://${LOCAL_IP}:${PORT}`;
+const appDir = `${cwd().replaceAll("\\", "/").replaceAll(" ", "%20")}`;
 app.listen(PORT, "0.0.0.0", async () => {
-    console.log(`Server running at ${address}`);
+    console.log(String.raw`       App folder   file:///${appDir}
+
+Server running at   ${address}
+    `);
     QRCode.toString(`${address}`, (_err, text) => {
         console.log(text);
     });
